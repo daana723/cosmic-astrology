@@ -16,6 +16,7 @@
     "@radix-ui/react-label": "latest",
     "@radix-ui/react-progress": "latest",
     "@radix-ui/react-select": "^2.0.0",
+    "@radix-ui/react-slider": "^1.6.1",
     "@radix-ui/react-slot": "^1.0.2",
     "@radix-ui/react-switch": "latest",
     "@radix-ui/react-tabs": "^1.0.4",
