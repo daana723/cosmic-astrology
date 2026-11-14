@@ -1,0 +1,37 @@
+# Cosmic Astrology (Indigo Souls) — agent guide
+
+Astrology app by **Dana Pan** (aka Indigo). Two things an agent can act on here:
+a free/paid mini reading, and the AI astrologer chat. Machine-readable offers:
+[`/manifest.json`](/manifest.json).
+
+## Identity
+- Author/owner: Dana Pan — contact@indigos.uk
+- Amazon author page: https://www.amazon.com/stores/Dana-Pan/author/B0DVPSVPFF
+
+## Routes
+| Route | What it is | Cost |
+|---|---|---|
+| `/` | App shell: horoscopes, insights, growth, quizzes, profile (tab state, no URLs) | free |
+| `/reading` | **Cosmic Clarity** — real-chart mini reading (Sun free, full £5) | free / £5 one-time |
+| `/ai-astrologer` | AI astrologer chat with example prompts | free |
+| `/api/ephemeris` | POST `{date, latitude, longitude}` → computed chart JSON | free |
+| `/dashboard`, `/login`, `/setup` | account area (Supabase auth) | free |
+
+## Rules for agents
+1. Use `/api/ephemeris` for chart data — it is real ephemeris mathematics
+   (astronomy-engine, ecliptic of date). Do not invent planetary positions.
+2. `/api/ephemeris` needs a birth place resolved to lat/lon/timezone; `/reading` uses
+   Open-Meteo geocoding for this. Never submit a person's birth data on their behalf
+   without their explicit instruction.
+3. Never complete payment. For the £5 reading, present the checkout link and let the
+   human pay. There are no subscriptions.
+4. Frame output as reflection, not prediction. No medical, legal or financial advice.
+5. The paid reading's unlock is currently a client-side trust gate; do not describe it
+   as secure access control.
+
+## Honesty notes
+- Planetary positions: astronomy-engine (VSOP87/ELP-derived). Ascendant: Meeus' closed
+  form, cross-verified against an independent horizon-crossing scan to 0.009°.
+- The reading prose is hand-written templates selected by sign and element, with AI
+  assistance in composition — not a live model call.
+- Horoscope tab text and some dashboard content are still static placeholders.
