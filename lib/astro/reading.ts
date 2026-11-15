@@ -1,5 +1,5 @@
 /**
- * Reading text for the £5 Cosmic Clarity mini reading.
+ * Reading text for the £5.99 Cosmic Clarity mini reading.
  *
  * Hand-written templates selected by sign and element — deliberately NOT an LLM
  * call, so the words never drift from the chart that was actually computed.

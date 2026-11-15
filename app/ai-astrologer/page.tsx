@@ -103,7 +103,7 @@ export default function AIAstrologerPage() {
             <Link href="/reading">
               <Button variant="outline" className="border-yellow-300/60 text-yellow-200 hover:bg-yellow-300/10">
                 <Star className="w-4 h-4 mr-2" />
-                Cosmic Clarity — your real chart, £5
+                Cosmic Clarity — your real chart, £5.99
               </Button>
             </Link>
           </div>

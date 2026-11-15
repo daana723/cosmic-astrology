@@ -12,7 +12,7 @@ chat. Machine-readable offers: [`/manifest.json`](/manifest.json).
 | Route | What it is | Cost |
 |---|---|---|
 | `/` | App shell: horoscopes, insights, growth, quizzes, profile (tab state, no URLs) | free |
-| `/reading` | **Cosmic Clarity** — AstroPsychology reading of the real chart (Sun + full chart table free, written reading £5) | free / £5 one-time |
+| `/reading` | **Cosmic Clarity** — AstroPsychology reading of the real chart (Sun + full chart table free, written reading £5.99) | free / £5.99 one-time |
 | `/ai-astrologer` | AI astrologer chat with example prompts | free |
 | `/api/ephemeris` | POST `{date, latitude, longitude}` → computed chart JSON | free |
 | `/dashboard`, `/login`, `/setup` | account area (Supabase auth) | free |
@@ -23,7 +23,7 @@ chat. Machine-readable offers: [`/manifest.json`](/manifest.json).
 2. `/api/ephemeris` needs a birth place resolved to lat/lon/timezone; `/reading` uses
    Open-Meteo geocoding for this. Never submit a person's birth data on their behalf
    without their explicit instruction.
-3. Never complete payment. For the £5 reading, present the checkout link and let the
+3. Never complete payment. For the £5.99 reading, present the checkout link and let the
    human pay. There are no subscriptions.
 4. Frame output as reflection, not prediction. No medical, legal or financial advice.
 5. The paid reading's unlock is currently a client-side trust gate; do not describe it
@@ -33,13 +33,13 @@ chat. Machine-readable offers: [`/manifest.json`](/manifest.json).
 - Planetary positions: astronomy-engine (VSOP87/ELP-derived). Ascendant: Meeus' closed
   form, cross-verified against an independent horizon-crossing scan to 0.009°. Midheaven
   verified to 0.05°. Houses are whole-sign, counted from the Rising.
-- The £5 reading is a hand-written AstroPsychology interpretation library (Jung/Rudhyar
+- The £5.99 reading is a hand-written AstroPsychology interpretation library (Jung/Rudhyar
   lineage) applied deterministically to the chart — about 1,400-1,800 words. It is **not**
   a live model call, so it costs nothing to fulfil and never drifts from the chart.
 - The AI routes (`/api/astrologer`, `/api/chat`, `/api/dream`, `/api/ritual`) run on this
   app's own Gemma 31B fine-tune through Adaption Labs when `ADAPTION_API_KEY` is set on the
   deployment. Without any AI credential they answer **503 "AI provider not configured"** —
-  that is an unconfigured deployment, not a bug, and the £5 reading does not depend on them.
+  that is an unconfigured deployment, not a bug, and the £5.99 reading does not depend on them.
   Astrological output is framed as reflection, not prediction.
 - Horoscope tab text and some dashboard content are still static placeholders; growth
   stats start at zero.

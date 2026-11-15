@@ -10,11 +10,11 @@ import { buildSections, type ReadingSection } from "@/lib/astro/fullReading"
 import type { Chart } from "@/lib/astro/ephemeris"
 
 /**
- * Cosmic Clarity — the full AstroPsychology reading (£5), live inside the app.
+ * Cosmic Clarity — the full AstroPsychology reading (£5.99), live inside the app.
  * Chart maths runs on the server via /api/ephemeris (astronomy-engine).
  * The Sun and the computed chart are free; the written reading sits behind the paywall.
  */
-const CHECKOUT_URL = "https://buy.stripe.com/eVqcMYbxweOKeIS3nE7N602" // TODO: repoint to the £5 one-time product
+const CHECKOUT_URL = "https://buy.stripe.com/6oUcMYfNM21YasCcYe7N603" // the live one-time product ("Astro-Psychology report")
 const PAID_KEY = "cc-paid"
 
 interface GeoHit {
@@ -165,7 +165,7 @@ export default function ReadingPage() {
           <p className="text-sm leading-relaxed text-slate-300">
             A real astronomy engine places your Sun, Moon and Rising for the moment and place of
             your birth. The reading written from it is plain and specific: no vague compliments, no
-            fear, no mysticism. Your Sun is free. The full three-part reading is £5.
+            fear, no mysticism. Your Sun is free. The full three-part reading is £5.99.
           </p>
         </header>
 
@@ -261,7 +261,7 @@ export default function ReadingPage() {
                * real access control — the templates ship in the client bundle and the unlock flag is
                * localStorage. The upgrade that makes it real is a Stripe webhook that marks an order
                * paid, plus a server route that returns the Moon/Rising/synthesis text only for paid
-               * orders. Fine for £5 while that is pending; do not describe it as secure.
+               * orders. Fine for £5.99 while that is pending; do not describe it as secure.
                */
               <Card className="border-white/10 bg-white/5">
                 <CardContent className="space-y-4 pt-6">
@@ -284,14 +284,14 @@ export default function ReadingPage() {
                     ))}
                   </div>
                   <div className="flex flex-col items-center gap-3 pt-2 text-center">
-                    <p className="text-lg text-amber-100">The full reading is £5</p>
+                    <p className="text-lg text-amber-100">The full reading is £5.99</p>
                     <p className="max-w-sm text-sm text-slate-300">
                       The Moon, the Rising and midheaven axis, every planet in its house, the aspects between
                       nine chart points, your lunar phase, the element and modality balance and an integration
                       practice — 1,400 to 1,800 words.
                     </p>
                     <a href={CHECKOUT_URL} target="_blank" rel="noreferrer noopener">
-                      <Button className="bg-amber-300 text-slate-900 hover:bg-amber-200">Unlock — £5</Button>
+                      <Button className="bg-amber-300 text-slate-900 hover:bg-amber-200">Unlock — £5.99</Button>
                     </a>
                     <button
                       className="text-xs text-slate-400 underline underline-offset-4"
