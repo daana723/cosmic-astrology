@@ -44,9 +44,9 @@
       "type": "physical_or_digital_book",
       "name": "AstroPsychology and the Letter series",
       "links": {
-        "astropsychologySample": "https://read.amazon.com/sample/B0DMCTCMSV?clientId=share",
-        "lettersSample": "https://read.amazon.com/sample/B0GFVM12QS?clientId=share",
-        "amazonUK": "https://www.amazon.co.uk/dp/B0GFVM12QS"
+        "amazonUKAstroPsychology": "https://www.amazon.co.uk/dp/B0DMCTCMSV",
+        "amazonUKLetters": "https://www.amazon.co.uk/dp/B0GFVM12QS",
+        "authorStore": "https://www.amazon.com/stores/Dana-Pan/author/B0DVPSVPFF"
       }
     }
   ],
