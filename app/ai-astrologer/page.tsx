@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 import { Textarea } from "@/components/ui/textarea"
 import { ArrowLeft, Send, Loader2, Star, Zap, Brain, Telescope } from "lucide-react"
+import Link from "next/link"
 import { useRouter } from "next/navigation"
 
 export default function AIAstrologerPage() {
@@ -94,10 +95,18 @@ export default function AIAstrologerPage() {
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <div className="mb-8">
-          <Button onClick={() => router.back()} variant="ghost" className="text-white hover:bg-white/20 mb-4">
-            <ArrowLeft className="w-4 h-4 mr-2" />
-            Back to Horoscope
-          </Button>
+          <div className="flex flex-wrap items-center justify-between gap-3 mb-4">
+            <Button onClick={() => router.back()} variant="ghost" className="text-white hover:bg-white/20">
+              <ArrowLeft className="w-4 h-4 mr-2" />
+              Back to Horoscope
+            </Button>
+            <Link href="/reading">
+              <Button variant="outline" className="border-yellow-300/60 text-yellow-200 hover:bg-yellow-300/10">
+                <Star className="w-4 h-4 mr-2" />
+                Cosmic Clarity — your real chart, £5
+              </Button>
+            </Link>
+          </div>
 
           <div className="text-center space-y-4 p-8 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20">
             <div className="inline-flex items-center gap-3 px-6 py-3 bg-white/20 backdrop-blur-sm rounded-full">
