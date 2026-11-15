@@ -1,13 +1,14 @@
 import { NextResponse } from "next/server"
 import { generateText } from "ai"
 import { aiErrorResponse } from "@/lib/ai/gateway"
+import { astroModel } from "@/lib/ai/model"
 
 export async function POST(request: Request) {
   try {
     const { messages } = await request.json()
 
     const { text } = await generateText({
-      model: "openai/gpt-4o-mini",
+      model: astroModel(),
       messages: messages,
       temperature: 0.7,
       maxOutputTokens: 1000,

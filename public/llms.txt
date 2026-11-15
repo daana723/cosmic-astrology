@@ -36,8 +36,10 @@ chat. Machine-readable offers: [`/manifest.json`](/manifest.json).
 - The £5 reading is a hand-written AstroPsychology interpretation library (Jung/Rudhyar
   lineage) applied deterministically to the chart — about 1,400-1,800 words. It is **not**
   a live model call, so it costs nothing to fulfil and never drifts from the chart.
-- The AI routes (`/api/astrologer`, `/api/chat`, `/api/dream`, `/api/ritual`) call the model
-  through the Vercel AI Gateway and answer **503 "AI provider not configured"** until
-  `AI_GATEWAY_API_KEY` is set on the deployment. Say that, rather than reporting a bug.
+- The AI routes (`/api/astrologer`, `/api/chat`, `/api/dream`, `/api/ritual`) run on this
+  app's own Gemma 31B fine-tune through Adaption Labs when `ADAPTION_API_KEY` is set on the
+  deployment. Without any AI credential they answer **503 "AI provider not configured"** —
+  that is an unconfigured deployment, not a bug, and the £5 reading does not depend on them.
+  Astrological output is framed as reflection, not prediction.
 - Horoscope tab text and some dashboard content are still static placeholders; growth
   stats start at zero.
