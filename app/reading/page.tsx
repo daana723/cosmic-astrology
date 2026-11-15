@@ -6,12 +6,13 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { buildReading, type Reading } from "@/lib/astro/reading"
+import { buildSections, type ReadingSection } from "@/lib/astro/fullReading"
 import type { Chart } from "@/lib/astro/ephemeris"
 
 /**
- * Cosmic Clarity — the £5 mini reading, live inside the app.
+ * Cosmic Clarity — the full AstroPsychology reading (£5), live inside the app.
  * Chart maths runs on the server via /api/ephemeris (astronomy-engine).
- * The Sun is free; Moon, Rising and the synthesis sit behind the paywall.
+ * The Sun and the computed chart are free; the written reading sits behind the paywall.
  */
 const CHECKOUT_URL = "https://buy.stripe.com/eVqcMYbxweOKeIS3nE7N602" // TODO: repoint to the £5 one-time product
 const PAID_KEY = "cc-paid"
@@ -106,6 +107,8 @@ export default function ReadingPage() {
       moonPhaseName: chart.moonPhase.name,
     })
   }, [chart])
+
+  const sections: ReadingSection[] = useMemo(() => (chart ? buildSections(chart) : []), [chart])
 
   async function compute() {
     setError("")
@@ -205,32 +208,49 @@ export default function ReadingPage() {
                 <p className="text-xs uppercase tracking-widest text-slate-400">Your Sun — free to read</p>
                 <p className="text-xl text-amber-100">{deg(chart.sun)}</p>
                 <p className="text-sm leading-relaxed text-slate-200">{reading.sun.text}</p>
+                <div className="space-y-2 border-t border-white/10 pt-4">
+                  <p className="text-xs uppercase tracking-widest text-slate-400">
+                    The sky you were born under
+                  </p>
+                  <div className="grid grid-cols-[1fr_auto_auto] gap-x-4 text-sm">
+                    {chart.points.map((p) => (
+                      <div key={p.key} className="contents">
+                        <span className="py-0.5 text-slate-300">{p.label}</span>
+                        <span className="py-0.5 text-amber-100">{deg(p)}</span>
+                        <span className="py-0.5 text-slate-400">
+                          {p.key === "ascendant" || p.key === "midheaven" ? "—" : `H${p.house}`}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                  <p className="text-xs text-slate-400">
+                    Whole-sign houses, counted from the Rising. Birth time read in the time zone of the
+                    place you named, not your browser's.
+                  </p>
+                </div>
               </CardContent>
             </Card>
 
             {paid ? (
               <Card className="border-white/10 bg-white/5">
-                <CardContent className="space-y-5 pt-6">
-                  <div className="space-y-1">
-                    <p className="text-xs uppercase tracking-widest text-slate-400">
-                      Your Moon · {reading.moon.phase}
-                    </p>
-                    <p className="text-lg text-amber-100">{deg(chart.moon)}</p>
-                    <p className="text-sm leading-relaxed text-slate-200">{reading.moon.text}</p>
-                  </div>
-                  <div className="space-y-1">
-                    <p className="text-xs uppercase tracking-widest text-slate-400">Your Rising</p>
-                    <p className="text-lg text-amber-100">{deg(chart.ascendant)}</p>
-                    <p className="text-sm leading-relaxed text-slate-200">{reading.rising.text}</p>
-                  </div>
-                  <div className="space-y-1 border-t border-white/10 pt-4">
-                    <p className="text-xs uppercase tracking-widest text-slate-400">How they fit</p>
-                    <p className="text-sm leading-relaxed text-slate-200">{reading.synthesis}</p>
-                  </div>
-                  <p className="text-xs text-slate-400">
-                    Also computed: Mercury {deg(chart.planets.mercury)}, Venus {deg(chart.planets.venus)},
-                    Mars {deg(chart.planets.mars)}, Jupiter {deg(chart.planets.jupiter)},
-                    Saturn {deg(chart.planets.saturn)}.
+                <CardContent className="space-y-6 pt-6">
+                  {sections.map((s) => (
+                    <div key={s.title} className="space-y-2">
+                      <p className="text-base text-amber-100">{s.title}</p>
+                      {s.meta && (
+                        <p className="text-xs uppercase tracking-widest text-slate-400">{s.meta}</p>
+                      )}
+                      {s.paragraphs.map((paragraph, i) => (
+                        <p key={i} className="text-sm leading-relaxed text-slate-200">
+                          {paragraph}
+                        </p>
+                      ))}
+                    </div>
+                  ))}
+                  <p className="border-t border-white/10 pt-4 text-xs text-slate-400">
+                    Cosmic Clarity computes real planetary positions and interprets them through a
+                    hand-written AstroPsychology framework — reflection, not prediction, and not medical,
+                    financial or legal advice.
                   </p>
                 </CardContent>
               </Card>
@@ -266,8 +286,9 @@ export default function ReadingPage() {
                   <div className="flex flex-col items-center gap-3 pt-2 text-center">
                     <p className="text-lg text-amber-100">The full reading is £5</p>
                     <p className="max-w-sm text-sm text-slate-300">
-                      Moon, Rising and the synthesis of the three — plus all five planets. One-time, no
-                      subscription, no account.
+                      The Moon, the Rising and midheaven axis, every planet in its house, the aspects between
+                      nine chart points, your lunar phase, the element and modality balance and an integration
+                      practice — 1,400 to 1,800 words.
                     </p>
                     <a href={CHECKOUT_URL} target="_blank" rel="noreferrer noopener">
                       <Button className="bg-amber-300 text-slate-900 hover:bg-amber-200">Unlock — £5</Button>

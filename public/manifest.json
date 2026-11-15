@@ -23,12 +23,14 @@
     {
       "id": "cosmic-clarity-full",
       "type": "digital_product",
-      "name": "Cosmic Clarity — full mini reading (Moon, Rising, synthesis, five planets)",
+      "name": "Cosmic Clarity — a full AstroPsychology reading",
       "price": { "amount": 5, "currency": "GBP", "recurring": false },
       "entry": "/reading",
       "checkout": "https://buy.stripe.com/eVqcMYbxweOKeIS3nE7N602",
       "requires": ["birth_date", "birth_time", "birth_place"],
-      "disclosures": ["AI-assisted composition", "reflection not prediction", "client-side unlock gate today"]
+      "wordCount": { "min": 1400, "max": 1800 },
+      "sections": ["chart table", "Sun", "Moon", "Rising and the MC axis", "each planet by whole-sign house", "aspects", "lunation phase (Rudhyar)", "element and modality balance", "one practice"],
+      "disclosures": ["hand-written rule-based interpretation, not an LLM call", "reflection, not prediction", "client-side payment gate, honour system"]
     },
     {
       "id": "ai-astrologer",
@@ -53,7 +55,7 @@
       "route": "/api/ephemeris",
       "method": "POST",
       "body": { "date": "ISO 8601 UTC", "latitude": "number", "longitude": "number east-positive" },
-      "returns": "sun, moon, ascendant, mercury, venus, mars, jupiter, saturn (each: longitude, sign, degree, degreeExact), moonPhase, timestamp",
+      "returns": "sun, moon, mercury, venus, mars, jupiter, saturn, ascendant, midheaven (each: longitude, sign, degree, degreeExact, house), points[], aspects[] (name, orb, bodies), lunarPhase, moonPhase, timestamp",
       "engine": "astronomy-engine — ecliptic of date (tropical); ascendant via Meeus closed form, verified to 0.009 deg"
     }
   ]

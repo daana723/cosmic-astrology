@@ -1,5 +1,6 @@
 import { type NextRequest, NextResponse } from "next/server"
 import { generateText } from "ai"
+import { aiErrorResponse } from "@/lib/ai/gateway"
 
 export async function POST(request: NextRequest) {
   try {
@@ -26,12 +27,12 @@ Your responses are:
 Always ask for birth details (date, time, location) when needed for accurate readings.`,
       prompt: message,
       temperature: 0.7,
-      maxTokens: 1000,
+      maxOutputTokens: 1000,
     })
 
     return NextResponse.json({ response: text })
   } catch (error) {
     console.error("Error in astrologer API route:", error)
-    return NextResponse.json({ error: "An unexpected error occurred" }, { status: 500 })
+    return aiErrorResponse(error, "An unexpected error occurred")
   }
 }
